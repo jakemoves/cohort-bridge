@@ -1,3 +1,5 @@
+var cohortServerURL = 'http://cohortserver-fluxdelux.herokuapp.com/broadcast';
+
 var osc = require("osc"),
 	request = require("request");
 
@@ -38,7 +40,7 @@ udpPort.on("message", function (oscMessage) {
 	if(oscMessage.address = "/cohort"){
 		console.log("OSC arguments: " + oscMessage.args[0]);
 		request.post(
-		    'http://cohort-server.herokuapp.com/broadcast',
+		    cohortServerURL,
 		    { json: { "action": oscMessage.args[0] } },
 		    function (error, response, body) {
 		        if (!error && response.statusCode == 200) {
